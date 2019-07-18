@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App1.ProductDetails"
+             xmlns:design ="clr-namespace:App1.Design;assembly:App1"
+             BindingContext="{x:Static design:ProductModel.Product}"
+             >
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="10,20">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name:"/>
+                <Label Text="{Binding Name}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Description:"/>
+                <Label Text="{Binding Description}" />
+            </StackLayout>
+
+            <Image Source = "{Binding Path= ImageUri}"
+                   Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+            <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="End">
+                <Button Text="Order" 
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.25}" 
+                        x:Name="OrderBtn" Clicked="OrderBtn_Clicked"
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Constant=30}">
+                </Button>
+                <Button Text="Favorite" 
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=OrderBtn, Constant= 200, Property=X}">
+                </Button>
+            </RelativeLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App1.OrderForm">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="AliceBlue"></Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="fancyText">
+                <Setter Property="TextColor" Value="Purple"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    <TabbedPage.Children>
+        <ContentPage Title="Order">
+            <Grid Padding="10,10" VerticalOptions="Start">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="Product:" Style="{x:StaticResource Key=fancyText}" />
+                <Label Text="{Binding ProductName}" Grid.Column="1" Grid.ColumnSpan="2"></Label>
+                <Label Text="Quantity:" Grid.Row="1"></Label>
+                <Entry Text="{Binding Path=Quantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="1"></Entry>
+                <Stepper Value="{Binding Path=Quantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" />
+                <Button Text="Place Order" Grid.Row="2" Grid.ColumnSpan="3" Clicked="Button_Clicked"/>
+            </Grid>
+        </ContentPage>
+        <ContentPage Title="History"></ContentPage>
+    </TabbedPage.Children>
+</TabbedPage>
