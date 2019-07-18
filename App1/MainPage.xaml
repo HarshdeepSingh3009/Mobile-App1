@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App1.MainPage">
+
+    <!--changed to list view in later parts of tutorial-->
+    <!--<StackLayout>
+        --><!-- Place new controls here --><!--
+        <Label Text="Welcome to My First App!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+        
+        <Button Text="Show Product Detail" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" 
+                Clicked="Button_Clicked" WidthRequest="200"></Button>
+    </StackLayout>-->
+    
+    <!--Binding is gonna be a list, so no need to specify any property here, we pass the list in the mainpage contructor
+    and bind there,it will automatically pick the list from the binding context in constructor-->
+    <ListView ItemsSource="{Binding}" ItemTapped="ListView_ItemTapped">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" Detail="{Binding Description}">
+                </TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>
