@@ -8,31 +8,52 @@
              xmlns:design ="clr-namespace:App1.Design;assembly:App1"
              BindingContext="{x:Static design:ProductModel.Product}"
              >
-    
-    <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="10,20">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Name:"/>
-                <Label Text="{Binding Name}" />
-            </StackLayout>
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<OnPlatform x:TypeArguments="x:Double" x:Key="xConstant">
+				<On Platform="Android" Value="200"/>
+				<On Platform="iOS, UWP" Value="100"/>
+			</OnPlatform>
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<OnPlatform x:TypeArguments="x:Double" x:Key="oXConstant">
+				<On Platform="Android" Value="40"/>
+				<On Platform="iOS, UWP" Value="40"/>
+			</OnPlatform>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<ScrollView Orientation="Vertical">
+			<StackLayout Orientation="Vertical" Padding="10,20">
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Name:"/>
+					<Label Text="{Binding Name}" />
+				</StackLayout>
 
-            <StackLayout Orientation="Vertical">
-                <Label Text="Description:"/>
-                <Label Text="{Binding Description}" />
-            </StackLayout>
+				<StackLayout Orientation="Vertical">
+					<Label Text="Description:"/>
+					<Label Text="{Binding Description}" />
+				</StackLayout>
 
-            <Image Source = "{Binding Path= ImageUri}"
+				<Image Source = "{Binding Path= ImageUri}"
                    Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
-            <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="End">
-                <Button Text="Order" 
-                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.25}" 
-                        x:Name="OrderBtn" Clicked="OrderBtn_Clicked"
-                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Constant=30}">
-                </Button>
-                <Button Text="Favorite" 
-                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=OrderBtn, Constant= 200, Property=X}">
-                </Button>
-            </RelativeLayout>
-        </StackLayout>
-    </ContentPage.Content>
+				<RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="End">
+					<Button Text="Order"
+							x:Name="OrderBtn" 
+							Clicked="OrderBtn_Clicked"
+							RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Constant={StaticResource oXConstant}}">
+						<RelativeLayout.WidthConstraint>
+							<OnPlatform x:TypeArguments="Constraint">
+								<On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.25}" />
+								<On Platform="iOS, UWP" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.15}" />
+							</OnPlatform>
+						</RelativeLayout.WidthConstraint>
+					</Button>
+					<Button Text="Favorite" 
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=OrderBtn, Constant={StaticResource xConstant}, Property=X}">
+					</Button>
+				</RelativeLayout>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
 </ContentPage>
