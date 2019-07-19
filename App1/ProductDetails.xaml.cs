@@ -24,5 +24,11 @@ namespace App1
 			Navigation.PushAsync(new OrderForm(
 				new Order {	ProductName = target.Name,	Quantity = 1 }));
 		}
+
+		private void FavButton_Clicked(object sender, System.EventArgs e)
+		{
+			var prod = BindingContext as Product;
+			ProductService.WishList.Add(prod);
+		}
 	}
 }

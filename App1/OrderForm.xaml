@@ -14,9 +14,9 @@
 					</Trigger>
 				</Style.Triggers>
 			</Style>
-			<Style TargetType="Label" x:Key="fancyText">
+			<!--<Style TargetType="Label" x:Key="fancyText">
 				<Setter Property="TextColor" Value="Purple"></Setter>
-			</Style>
+			</Style>-->
 		</ResourceDictionary>
 	</TabbedPage.Resources>
 	<TabbedPage.Children>
@@ -24,7 +24,11 @@
 			<Grid Padding="10,10" VerticalOptions="Start">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="1*"></ColumnDefinition>
+					<ColumnDefinition>
+						<ColumnDefinition.Width>
+							<OnIdiom x:TypeArguments="GridLength" Desktop="6*" Tablet="2*" Phone="1*"/>
+						</ColumnDefinition.Width>
+					</ColumnDefinition>
 					<ColumnDefinition Width="2*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
@@ -32,7 +36,7 @@
 					<RowDefinition Height="*"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
 				</Grid.RowDefinitions>
-				<Label Text="Product:" Style="{x:StaticResource Key=fancyText}" />
+				<Label Text="Product:" />  <!--Style="{x:StaticResource Key=fancyText}" />-->
 				<Label Text="{Binding ProductName}" Grid.Column="1" Grid.ColumnSpan="2"></Label>
 				<Label Text="Quantity:" Grid.Row="1"></Label>
 				<Entry Text="{Binding Path=Quantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="1"></Entry>

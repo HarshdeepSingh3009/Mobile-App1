@@ -10,16 +10,36 @@
              >
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<OnPlatform x:TypeArguments="x:Double" x:Key="xConstant">
-				<On Platform="Android" Value="200"/>
-				<On Platform="iOS, UWP" Value="100"/>
-			</OnPlatform>
+			<OnIdiom x:TypeArguments="x:Double" x:Key="xConstant">
+				<OnIdiom.Phone>
+					<OnPlatform x:TypeArguments="x:Double" >
+						<On Platform="Android" Value="200"/>
+						<On Platform="iOS, UWP" Value="100"/>
+					</OnPlatform>
+				</OnIdiom.Phone>
+				<OnIdiom.Tablet>
+					<OnPlatform x:TypeArguments="x:Double" >
+						<On Platform="Android" Value="600"/>
+						<On Platform="iOS, UWP" Value="600"/>
+					</OnPlatform>
+				</OnIdiom.Tablet>
+			</OnIdiom>
 		</ResourceDictionary>
 		<ResourceDictionary>
-			<OnPlatform x:TypeArguments="x:Double" x:Key="oXConstant">
-				<On Platform="Android" Value="40"/>
-				<On Platform="iOS, UWP" Value="40"/>
-			</OnPlatform>
+			<OnIdiom x:TypeArguments="x:Double" x:Key="oXConstant">
+				<OnIdiom.Phone>
+					<OnPlatform x:TypeArguments="x:Double">
+						<On Platform="Android" Value="40"/>
+						<On Platform="iOS, UWP" Value="40"/>
+					</OnPlatform>
+				</OnIdiom.Phone>
+				<OnIdiom.Tablet>
+					<OnPlatform x:TypeArguments="x:Double">
+						<On Platform="Android" Value="150"/>
+						<On Platform="iOS, UWP" Value="100"/>
+					</OnPlatform>
+				</OnIdiom.Tablet>
+			</OnIdiom>
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.Content>
@@ -49,8 +69,14 @@
 							</OnPlatform>
 						</RelativeLayout.WidthConstraint>
 					</Button>
-					<Button Text="Favorite" 
+					<Button Text="Favorite" Clicked="FavButton_Clicked"
                         RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=OrderBtn, Constant={StaticResource xConstant}, Property=X}">
+						<RelativeLayout.WidthConstraint>
+							<OnPlatform x:TypeArguments="Constraint">
+								<On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.25}"/>
+								<On Platform="iOS, UWP" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.15}"/>
+							</OnPlatform>
+						</RelativeLayout.WidthConstraint>
 					</Button>
 				</RelativeLayout>
 			</StackLayout>
