@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace App1.Services
 {
@@ -22,6 +23,7 @@ namespace App1.Services
 		{
 			client = new HttpClient();
 			client.BaseAddress = new Uri("https://hplussport.com/api/");
+			WishList = new List<Product>();
 		}
 
 		#endregion
@@ -61,6 +63,14 @@ namespace App1.Services
 			if (WishList != null)
 			{
 				//save wish list to file
+				var path = System.IO.Path.Combine(FileSystem.AppDataDirectory, _wishList);
+				using (var sWriter = new StreamWriter(path))
+				{
+					using (var jwriter = new JsonTextWriter(sWriter))
+					{
+						JsonSerializer.CreateDefault().Serialize(jwriter, WishList);
+					}
+				}
 			}
 		}
 
@@ -71,6 +81,21 @@ namespace App1.Services
 		public static async Task LoadWishList()
 		{
 			//load wishList from file
+			var path = System.IO.Path.Combine(FileSystem.AppDataDirectory, _wishList);
+			using (var sReader = new StreamReader(path))
+			{
+				using (var jReader = new JsonTextReader(sReader))
+				{
+					try
+					{
+						WishList = JsonSerializer.CreateDefault().Deserialize<List<Product>>(jReader);
+					}
+					catch (Exception ex)
+					{
+						System.Diagnostics.Debug.WriteLine(ex.Message);
+					}
+				}
+			}
 		}
 		#endregion
 

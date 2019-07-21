@@ -13,6 +13,7 @@ namespace App1.Services
 		#region Private Members
 
 		private int _quantity;
+		private int rate;
 
 		#endregion
 
@@ -41,6 +42,16 @@ namespace App1.Services
 					_quantity = value;
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Quantity"));
 				}
+			}
+		}
+
+		public int Rating
+		{
+			get { return rate; }
+			set
+			{
+				rate = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Rating"));
 			}
 		}
 

@@ -34,8 +34,16 @@ namespace App1
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-			var products = await ProductService.GetProductsAsync();
-			BindingContext = products;
+			INetworkManager networkManager = DependencyService.Get<INetworkManager>();
+			if (networkManager.IsNetworkConnected())
+			{
+				var products = await ProductService.GetProductsAsync();
+				BindingContext = products;
+			}
+			else
+			{
+			await DisplayAlert("Not Connected", "you are not connected to network", "Ok");
+			}
 		}
 
 	}
