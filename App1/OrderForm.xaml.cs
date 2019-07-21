@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace App1
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+	[XamlCompilation(XamlCompilationOptions.Skip)]
 	public partial class OrderForm : TabbedPage
 	{
 		public OrderForm()
@@ -26,7 +26,7 @@ namespace App1
 		private void Button_Clicked(object sender, EventArgs e)
 		{
 			var order = BindingContext as Order;
-			DisplayAlert("Order Placed", $"Order placed for {order.Quantity} of {order.ProductName}", "Ok");
+			DisplayAlert("Order Placed", $"Order placed for {order.Quantity} of {order.ProductName}\r\n You rated this {order.Rating}.", "Ok");
 		}
 	}
 }
